@@ -1,0 +1,18 @@
+         Model Evaluation
+We'll summarize the evaluation metrics and identify the best-performing model.              
+		    MAE           MSE          RMSE        R2
+Linear Regression  4658.089015  9.700072e+07   9848.894289  0.941585
+Decision Tree      5466.566288  1.817283e+08  13480.664243  0.890561
+Random Forest      4524.147276  1.135647e+08  10656.673362  0.931610
+Gradient Boosting  4733.322257  1.323008e+08  11502.209851  0.920326
+
+
+
+
+
+### Recommendations
+
+1. **Experience Matters**: Tenure and past experience significantly influence salaries. Data professionals should seek continuous growth and leverage their experience when negotiating salaries.
+2. **Performance Ratings**: High performance ratings correlate with higher salaries. Professionals should focus on enhancing their performance and seek feedback to improve.
+3. **Role and Department**: Certain job roles and departments offer higher salaries. Professionals might consider roles or units with higher compensation when planning their career paths.
+4. **Skill Development**: Invest in skills and certifications relevant to higher-paying roles. Continuous learning and upskilling can lead to better job opportunities and higher salaries.
