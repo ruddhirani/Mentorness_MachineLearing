@@ -1,0 +1,105 @@
+### Data Exploration ###
+First few rows of the dataset:
+
+   Transaction_ID       Timestamp Vehicle_Type         FastagID TollBoothID Lane_Type Vehicle_Dimensions  Transaction_Amount  Amount_paid                  Geographical_Location  Vehicle_Speed Vehicle_Plate_Number Fraud_indicator
+0               1  1/6/2023 11:20         Bus   FTG-001-ABC-121       A-101   Express              Large                 350          120  13.059816123454882, 77.77068662374292             65           KA11AB1234           Fraud
+1               2  1/7/2023 14:55          Car  FTG-002-XYZ-451       B-102   Regular              Small                 120          100  13.059816123454882, 77.77068662374292             78           KA66CD5678           Fraud
+2               3  1/8/2023 18:25   Motorcycle              NaN       D-104   Regular              Small                   0            0  13.059816123454882, 77.77068662374292             53           KA88EF9012       Not Fraud
+3               4   1/9/2023 2:05        Truck  FTG-044-LMN-322       C-103   Regular              Large                 350          120  13.059816123454882, 77.77068662374292             92           KA11GH3456           Fraud
+4               5  1/10/2023 6:35          Van  FTG-505-DEF-652       B-102   Express             Medium                 140          100  13.059816123454882, 77.77068662374292             60           KA44IJ6789           Fraud
+
+Summary statistics:
+
+       Transaction_ID  Transaction_Amount  Amount_paid  Vehicle_Speed
+count     5000.000000          5000.00000  5000.000000    5000.000000
+mean      2500.500000           161.06200   141.261000      67.851200
+std       1443.520003           112.44995   106.480996      16.597547
+min          1.000000             0.00000     0.000000      10.000000
+25%       1250.750000           100.00000    90.000000      54.000000
+50%       2500.500000           130.00000   120.000000      67.000000
+75%       3750.250000           290.00000   160.000000      82.000000
+max       5000.000000           350.00000   350.000000     118.000000
+
+Missing values:
+
+Transaction_ID             0
+Timestamp                  0
+Vehicle_Type               0
+FastagID                 549
+TollBoothID                0
+Lane_Type                  0
+Vehicle_Dimensions         0
+Transaction_Amount         0
+Amount_paid                0
+Geographical_Location      0
+Vehicle_Speed              0
+Vehicle_Plate_Number       0
+Fraud_indicator            0
+
+Distribution of Fraud Indicator saved as 'fraud_indicator_distribution.png'
+
+### Data Preprocessing and Feature Engineering ###
+
+Data after feature engineering:
+
+   Transaction_Amount  Amount_paid  Vehicle_Speed Fraud_indicator  Hour  DayOfWeek  Month  Vehicle_Type_Bus   Vehicle_Type_Car  Vehicle_Type_Motorcycle  Vehicle_Type_SUV  Vehicle_Type_Sedan  Vehicle_Type_Truck  Vehicle_Type_Van  Lane_Type_Express  Lane_Type_Regular  Geographical_Location_12.84197701525119, 77.67547528176169  Geographical_Location_12.936687032945434, 77.53113977439017  Geographical_Location_13.042660878688794, 77.47580097259879  Geographical_Location_13.059816123454882, 77.77068662374292  Geographical_Location_13.21331620748757, 77.55413526894684  Amount_Difference
+0                 350          120             65           Fraud    11          4      1                  1                 0                        0                 0                   0                   0                 0                  1                  0                                                           0                                                            0                                                            0                                                            1                                                           0                230
+1                 120          100             78           Fraud    14          5      1                  0                 1                        0                 0                   0                   0                 0                  0                  1                                                           0                                                            0                                                            0                                                            1                                                           0                 20
+2                   0            0             53       Not Fraud    18          6      1                  0                 0                        1                 0                   0                   0                 0                  0                  1                                                           0                                                            0                                                            0                                                            1                                                           0                  0
+3                 350          120             92           Fraud     2          0      1                  0                 0                        0                 0                   0                   1                 0                  0                  1                                                           0                                                            0                                                            0                                                            1                                                           0                230
+4                 140          100             60           Fraud     6          1      1                  0                 0                        0                 0                   0                   0                 1                  1                  0                                                           0                                                            0                                                            0                                                            1                                                           0                 40
+### Model Development ###
+### Model Evaluation ###
+
+Classification report:
+
+              precision    recall  f1-score   support
+
+       Fraud       1.00      0.99      0.99       295
+   Not Fraud       1.00      1.00      1.00      1205
+
+    accuracy                           1.00      1500
+   macro avg       1.00      0.99      1.00      1500
+weighted avg       1.00      1.00      1.00      1500
+
+
+Confusion matrix saved as 'confusion_matrix.png'
+
+### Real-time Fraud Detection Feasibility ###
+
+Model saved as 'fastag_fraud_detection_model.pkl'
+
+
+Fraud prediction for sample transaction: Not Fraud
+
+### Explanatory Analysis ###
+
+Feature importance:
+
+                                                        Feature  Importance
+20                                            Amount_Difference    0.661609
+1                                                   Amount_paid    0.157752
+0                                            Transaction_Amount    0.086852
+8                                       Vehicle_Type_Motorcycle    0.009618
+2                                                 Vehicle_Speed    0.009605
+9                                              Vehicle_Type_SUV    0.008533
+6                                             Vehicle_Type_Bus     0.008387
+3                                                          Hour    0.008026
+5                                                         Month    0.008005
+7                                              Vehicle_Type_Car    0.007716
+11                                           Vehicle_Type_Truck    0.006849
+4                                                     DayOfWeek    0.005150
+12                                             Vehicle_Type_Van    0.003612
+18  Geographical_Location_13.059816123454882, 77.77068662374292    0.003597
+10                                           Vehicle_Type_Sedan    0.003531
+14                                            Lane_Type_Regular    0.003219
+13                                            Lane_Type_Express    0.002262
+17  Geographical_Location_13.042660878688794, 77.47580097259879    0.001709
+19   Geographical_Location_13.21331620748757, 77.55413526894684    0.001442
+15   Geographical_Location_12.84197701525119, 77.67547528176169    0.001414
+16  Geographical_Location_12.936687032945434, 77.53113977439017    0.001112
+
+Feature importance plot saved as 'feature_importance.png'
+
+
+### End of Output ###
